@@ -9,7 +9,7 @@ previews:
 # List all services *except* PostgreSQL databases here
 services:
   # A web service on the Ruby native runtime
-  - type: app-web
+  - type: web-app
     runtime: node
     name: TpBlueprint
     repo: https://github.com/Garnmore/TpBlueprint # Default: Repo containing render.yaml
