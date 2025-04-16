@@ -1,0 +1,32 @@
+#################################################################
+# Example render.yaml                                           #
+# Do not use this file directly! Consult it for reference only. #
+#################################################################
+
+previews:
+  generation: automatic # Enable preview environments
+
+# List all services *except* PostgreSQL databases here
+services:
+  # A web service on the Ruby native runtime
+  - type: app-web
+    runtime: node
+    name: TpBlueprint
+    repo: https://github.com/Garnmore/TpBlueprint # Default: Repo containing render.yaml
+    numInstances: 3   # Manual scaling configuration. Default: 1 for new services
+    region: frankfurt # Default: oregon
+    plan: free    # Default: starter
+    branch: main     # Default: master
+    buildCommand: npm install
+    startCommand: npm start
+    autoDeploy: true # Disable automatic deploys
+    envVars:
+    - key: DB_URL
+      FromDatabase:
+      name: app-db
+      property: connectionString
+databases:
+  # A database with one read replica
+  - name: app-db
+    region: frankfurt
+    plan: free
